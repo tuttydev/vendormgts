@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Vendor Management System{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* Reset some default styles */
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: teal;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: grey; /* Transparent blue */
+            color: grey;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 2px 5px rgba(0, 4, 4, 4.4);
+            z-index: 1000;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav ul li {
+            display: inline;
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: #87CEFA;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 4.4);
+
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        
+        main {
+            background:  #87CEFA    ;
+            color: grey;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+            padding: 2rem;
+            width: 100%;
+            max-width: 800px;
+            margin: 6rem auto; /* Center content with space for header and footer */
+            text-align: center;
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(52, 58, 64, 0.8); /* Transparent dark gray */
+            color: teal;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+
+            text-align: center;
+            padding: 1rem;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+        
+            main {
+                padding: 1rem;
+                margin: 4rem auto; /* Adjust margin for mobile */
+            }
+        
+            nav ul {
+                text-align: center;
+            }
+        
+            nav ul li {
+                display: block;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Vendor Management System</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'vendor_list' %}">Vendors</a></li>
+                <li><a href="{% url 'add_vendor' %}">Add Vendor</a></li>
+             
+                <!-- Add more navigation links as needed -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Vendor Management System</p>
+    </footer>
+    
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('nav ul li a');
+    
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Prevent default behavior if anchor link
+                    if (this.getAttribute('href').startsWith("#")) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href').substring(1);
+                        const targetElement = document.getElementById(targetId);
+    
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

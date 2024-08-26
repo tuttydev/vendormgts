@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ vendor.name }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ vendor.name }}</h1>
+    <p>Address: {{ vendor.address }}</p>
+    <p>Contact: {{ vendor.contact }}</p>
+
+    <a href="{% url 'vendor_update' vendor.id %}">Edit Vendor</a> | 
+    <a href="{% url 'vendor_delete' vendor.id %}">Delete Vendor</a>
+{% endblock %}

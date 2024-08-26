@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Vendor List{% endblock %}
+
+{% block content %}
+    <h1>Vendors</h1>
+    <ul>
+        {% for vendor in vendors %}
+            <li><a href="{% url 'vendor_detail' vendor.id %}">{{ vendor.name }}</a></li>
+        {% empty %}
+            <li>No vendors available.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_vendor' %}">Add New Vendor</a>
+    <script src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}
